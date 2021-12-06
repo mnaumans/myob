@@ -19,6 +19,7 @@
 
 - Run the primary console app named "PayslipGenerator" with following input for the console window
 >GenerateMonthlyPayslip "{Employee Name}" {Annual Salary}
+
 {Employee Name} = Any string name
 {Annual Salary} = A Numerice figure e.g. 60000
 
