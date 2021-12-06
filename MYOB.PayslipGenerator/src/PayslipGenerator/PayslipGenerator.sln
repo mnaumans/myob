@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayslipGenerator.BusinessLo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayslipGenerator.PayslipGeneratorTests", "PayslipGenerator.PayslipGeneratorTests\PayslipGenerator.PayslipGeneratorTests.csproj", "{E4B28880-3E86-46C8-852B-A3454AC9CA2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayslipGenerator.BusinessLogicTests", "PayslipGenerator.BusinessLogicTests\PayslipGenerator.BusinessLogicTests.csproj", "{0A3E4CD0-80C3-4D6F-8F7E-12889DA80AF3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E4B28880-3E86-46C8-852B-A3454AC9CA2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4B28880-3E86-46C8-852B-A3454AC9CA2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4B28880-3E86-46C8-852B-A3454AC9CA2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A3E4CD0-80C3-4D6F-8F7E-12889DA80AF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A3E4CD0-80C3-4D6F-8F7E-12889DA80AF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A3E4CD0-80C3-4D6F-8F7E-12889DA80AF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A3E4CD0-80C3-4D6F-8F7E-12889DA80AF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
