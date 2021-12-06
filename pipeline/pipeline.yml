@@ -1,0 +1,32 @@
+name: $(Date:yyyyMMdd).$(Rev:r)
+
+
+# Pipeline is run on commits, tags PRs and master and dev branch
+trigger:
+  tags:
+    include: 
+    - '*'
+  branches:
+    include:
+    - main
+# Run pipeline whenever a PR is raised
+pr:
+  branches:
+    include:
+    - '*'
+
+  paths:
+    exclude:
+     - .github
+     - .vscode
+     - ReadME.md
+
+stages:
+  - stage: Build
+    jobs:
+    - job: 'Build'
+      pool:
+        vmImage: 'windows-latest'
+      container: mcr.microsoft.com/windows/servercore:ltsc2019
+      steps:
+      - template: 'templates/build.yaml'

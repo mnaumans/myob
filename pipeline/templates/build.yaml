@@ -1,0 +1,61 @@
+steps:
+  - task: UseDotNet@2
+    displayName: 'Use .NET Core sdk 5.0.100'
+    inputs:
+      packageType: 'sdk'
+      version: '5.0.100'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Restore'
+    inputs:
+      command: 'restore'
+      projects: '**/*.sln'
+      feedsToUse: 'config'
+      nugetConfigPath: 'NuGet.config'
+  
+  - task: DotNetCoreCLI@2
+    displayName: 'Build'
+    inputs:
+      command: 'build'
+      projects: '**/*.csproj'
+      arguments: '--configuration release --no-restore'
+    
+  - task: DotNetCoreCLI@2
+    displayName: 'Run Tests'
+    inputs:
+      command: 'test'
+      projects: '**/*.csproj'
+      arguments: '--collect "XPlat Code Coverage" /p:threshold=5 /p:CollectCoverage=true /p:ThresholdType=Line'
+  
+  - task: DotNetCoreCLI@2
+    displayName: Install ReportGenerator tool
+    inputs:
+      command: custom
+      custom: tool
+      arguments: 'install --configfile NuGet.Config  --tool-path . dotnet-reportgenerator-globaltool'
+  
+  - script: 'reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/coverlet/reports -reporttypes:"Cobertura"'
+    displayName: Create reports
+    
+  - task: PublishCodeCoverageResults@1
+    displayName: 'Publish code coverage'
+    inputs:
+      codeCoverageTool: Cobertura
+      summaryFileLocation: $(Build.SourcesDirectory)/coverlet/reports/Cobertura.xml  
+  
+  - task: DotNetCoreCLI@2
+    displayName: 'Publish & Zip'
+    inputs:
+      command: 'publish'
+      publishWebProjects: false
+      projects: |
+        src/PayslipGenerator/PayslipGenerator/*.csproj
+        src/PayslipGenerator/PayslipGenerator.BusinessLogic/*.csproj
+      arguments: '--configuration release --output $(Build.ArtifactStagingDirectory)'
+  
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifacts'
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'artifacts'
+      publishLocation: 'Container'

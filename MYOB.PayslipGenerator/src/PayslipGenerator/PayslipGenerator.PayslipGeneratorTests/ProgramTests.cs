@@ -37,6 +37,8 @@ namespace PayslipGenerator.PayslipGeneratorTests
         [Fact]
         public void GeneratePayslip_ShouldReturnSuccess()
         {
+            _mockGrossIncomeCalculator.Setup(x => x.GetMonthlyGrossIncome(It.IsAny<decimal>())).Returns(5000.00M);
+            _mockIncomeTaxCalculator.Setup(x => x.GetMonthlyIncomeTax(It.IsAny<decimal>())).Returns(500.00M);
             var result = Program.GeneratePayslip(_serviceProvider, $"GenerateMonthlyPayslip \"Mary Song\" 60000");
 
             result.Contains($"Monthly Payslip for: \"Mary Song\"\nGross Monthly Income: $5000.00\nMonthly Income Tax: $500.00\nNet Monthly Income: $4500.00");
