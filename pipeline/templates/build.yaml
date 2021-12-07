@@ -49,8 +49,7 @@ steps:
       command: 'publish'
       publishWebProjects: false
       projects: |
-        src/PayslipGenerator/PayslipGenerator/*.csproj
-        src/PayslipGenerator/PayslipGenerator.BusinessLogic/*.csproj
+        **/PayslipGenerator.csproj
       arguments: '--configuration release --output $(Build.ArtifactStagingDirectory)'
   
   - task: PublishBuildArtifacts@1
